@@ -1,0 +1,40 @@
+driver:
+  name: vagrant
+  customize:
+    memory: 2048
+
+provisioner:
+  name: chef_zero
+  require_chef_omnubus: 11.16.4
+
+platforms:
+  - name: chef11
+    driver:
+      box: oel65-fixed
+    provisioner:
+      require_chef_omnubus: 11.16.4
+  #- name: chef12
+  #  driver:
+  #    box: oel65-chef-java
+  #  provisioner:
+  #    require_chef_omnubus: 12.4.1
+
+
+suites:
+  - name: default
+    driver:
+      vm_hostname: agent01
+    data_bags_path: "test/integration/data_bags"
+    run_list:
+      - recipe[teamcity_agent::default]
+      #- recipe[test-helper::default]
+    attributes:
+      java:
+         install_flavor: 'oracle'
+         jdk_version: '8'
+         oracle:
+           accept_oracle_download_terms: true
+      teamcity_agent:
+            home: '/opt/elasticsearch_home'
+            server_url: 'http://dhcp-amer-vpn-rmdc-anyconnect-10-159-127-2.vpn.oracle.com:8111'
+            #server_url: 'http://dhcp-rmdc-twvpn-2-vpnpool-10-159-77-171.vpn.oracle.com:8111'
