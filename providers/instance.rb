@@ -1,7 +1,3 @@
-#Chef::Resource::RemoteFile.send(:include, TeamCity::Agent_helper)
-#Chef::Resource::Execute.send(:include, TeamCity::Agent_helper)
-#Chef::Resource::Link.send(:include, TeamCity::Agent_helper)
-
 use_inline_resources
 
 def whyrun_supported?
@@ -13,7 +9,6 @@ action :install do
 
   pkg_name = new_resource.install_archive
   local_pkg_path = ::File.join(Chef::Config[:file_cache_path], pkg_name)
-  #install_path_root = ::File.expand_path('..', new_resource.install_path)
 
   group new_resource.group do
     action :create
@@ -65,7 +60,7 @@ action :configure do
     source 'etc/initd.erb'
     cookbook 'teamcity_agent'
     mode 0755
-    variables(:tc_agent_home => new_resource.install_path)
+    variables(tc_agent_home: new_resource.install_path)
   end
 
   agent_properties = ::File.join(new_resource.install_path, 'conf/buildAgent.properties')
