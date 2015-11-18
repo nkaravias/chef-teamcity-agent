@@ -1,6 +1,7 @@
 module TeamCity
   module Agent_helper
-    
+
+=begin    
     def tc_agent_installed?(install_path, archive, version)
       # does the symlink exist 
       return false unless File.symlink?(install_path)
@@ -11,7 +12,7 @@ module TeamCity
       return false unless ::File.exist?(::File.join(install_path,'lib','agent.jar'))
       true
     end
-
+=end
   end
 end
 
