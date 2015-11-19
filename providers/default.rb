@@ -7,6 +7,10 @@ end
 action :install do
   package 'unzip'
 
+  unless new_resource.use_default_java == false
+    include_recipe 'java'
+  end
+
   pkg_name = new_resource.install_archive
   local_pkg_path = ::File.join(Chef::Config[:file_cache_path], pkg_name)
 

@@ -11,17 +11,8 @@ platforms:
   - name: chef11
     driver:
       box: oel65-fixed
-#      network:
-#      - ["forwarded_port", {guest: 9090, host: 9090}]
-#      - ["public_network", { type: "dhcp" }]
     provisioner:
       require_chef_omnubus: 11.16.4
-  #- name: chef12
-  #  driver:
-  #    box: oel65-chef-java
-  #  provisioner:
-  #    require_chef_omnubus: 12.4.1
-
 
 suites:
   - name: default
@@ -29,9 +20,7 @@ suites:
       vm_hostname: agent01
     data_bags_path: "test/integration/data_bags"
     run_list:
-      #- recipe[teamcity_agent::default]
       - recipe[teamcity_agent_test::default]
-      #- recipe[test-helper::default]
     attributes:
       java:
          install_flavor: 'oracle'
@@ -41,4 +30,8 @@ suites:
       teamcity_agent:
         home: '/opt/elasticsearch_home'
         server_url: 'http://10.156.130.153:8111'    
-        #server_url: 'http://dhcp-amer-vpn-rmdc-anyconnect-10-159-120-222.vpn.oracle.com:8111'
+        java:
+          version: 'Oracle JDK 1.7u75'
+          url: 'http://download.oracle.com/otn-pub/java/jdk/7u75-b13/jdk-7u75-linux-x64.tar.gz'
+          pkg_checksum: '6f1f81030a34f7a9c987f8b68a24d139'
+          home: '/opt/jdks/oracle-jdk7-x86_64'

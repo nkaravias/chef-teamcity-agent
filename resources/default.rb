@@ -10,3 +10,4 @@ attribute :install_archive, kind_of: String, default: 'buildAgent.zip'
 attribute :server_url, kind_of: String, required: true
 attribute :version, kind_of: String, default: '8.1.4'
 attribute :service_name, kind_of: String, default: 'tcbuildagent'
+attribute :use_default_java, kind_of: [TrueClass, FalseClass], default: true
