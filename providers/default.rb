@@ -7,7 +7,8 @@ end
 action :install do
   package 'unzip'
 
-  include_recipe 'java' unless new_resource.use_default_java == false
+  # Use a simple include on Chef 12
+  run_context.include_recipe 'java' unless new_resource.use_default_java == false
 
   pkg_name = new_resource.install_archive
   local_pkg_path = ::File.join(Chef::Config[:file_cache_path], pkg_name)
