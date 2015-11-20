@@ -9,5 +9,7 @@ attribute :install_path, kind_of: String, default: '/var/tcbuildagent'
 attribute :install_archive, kind_of: String, default: 'buildAgent.zip'
 attribute :server_url, kind_of: String, required: true
 attribute :version, kind_of: String, default: '8.1.4'
-attribute :service_name, kind_of: String, default: 'tcbuildagent'
+attribute :service_name, kind_of: String, :name_attribute => true
 attribute :use_default_java, kind_of: [TrueClass, FalseClass], default: true
+
+attribute(:custom_agent_properties, kind_of: Hash, default: {})

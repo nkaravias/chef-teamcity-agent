@@ -1,0 +1,31 @@
+{
+  "name": "localdev",
+  "description": "Kitchen CI local environment",
+  "cookbook_versions": {
+
+  },
+  "json_class": "Chef::Environment",
+  "chef_type": "environment",
+  "default_attributes": {
+    "java": {
+       "install_flavor": "oracle",
+       "jdk_version": "8",
+       "oracle": {
+          "accept_oracle_download_terms": true
+       }
+    },
+    "teamcity_agent": {
+       "server_url": "http://10.156.130.153:8111",
+       "use_default_java": true,
+       "user": "teamcity",
+       "group": "teamcity",
+       "home": "/home/teamcity",
+       "install_path": "/var/tcbuildagent",
+       "custom_agent_properties": { "#kitchen_test": "parameter" }
+     }
+  },
+  "override_attributes": {
+
+  }
+}
+

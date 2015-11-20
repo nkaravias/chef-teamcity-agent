@@ -63,7 +63,8 @@ action :configure do
     source 'etc/initd.erb'
     cookbook 'teamcity_agent'
     mode 0755
-    variables(tc_agent_home: new_resource.install_path)
+    variables(tc_agent_home: new_resource.install_path, tc_user: new_resource.user, 
+tc_service_name: new_resource.service_name)
   end
 
   agent_properties = ::File.join(new_resource.install_path, 'conf/buildAgent.properties')
@@ -85,7 +86,7 @@ action :configure do
     mode 0755
   end
 
-  template 'Agent properties' do
+  template "Creating buildAgent.properties for #{auth_token}" do
     path agent_properties
     source 'etc/agent.properties.erb'
     cookbook 'teamcity_agent'
@@ -93,7 +94,9 @@ action :configure do
     group new_resource.group
     mode 0644
     action :create
-    variables(server_url: new_resource.server_url, auth_token: auth_token)
+    helpers(TeamCity::AgentHelper)
+    variables(server_url: new_resource.server_url, auth_token: auth_token, 
+custom_agent_properties: new_resource.custom_agent_properties)
     notifies :restart, "service[#{new_resource.service_name}]", :delayed
   end
 

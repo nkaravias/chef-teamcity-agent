@@ -43,6 +43,11 @@ ownPort=9090
 ## It is automatically generated and saved on the first agent connection to the server.
 <%= @auth_token %>
 
+# Dynamic properties
+<% @custom_agent_properties.each do |k,v| %>
+<%= render(@custom_agent_properties, k, '=') -%>
+<% end %>
+
 ######################################
 #   Default Build Properties         #
 ######################################
@@ -67,7 +72,7 @@ teamcity.agent.jvm.os.name=Windows
 ## somewhere in your build script. You can reference it in build script as '${teamcity.idea.home}'
 system.teamcity.idea.home=%system.agent.home.dir%/plugins/idea
 
-
 # Environment Variables
 
 env.LC_ALL=
+

@@ -4,10 +4,10 @@
 # description: TeamCity startup script
 #
 
-TEAMCITY_SERVICE_NAME=tcbuildagent
-TEAMCITY_USER=teamcity
-TEAMCITY_AGENT=/var/tcbuildagent/bin/agent.sh
-TEAMCITY_PIDFILE=/var/tcbuildagent/logs/buildAgent.pid
+TEAMCITY_SERVICE_NAME=<%= @tc_service_name %>
+TEAMCITY_USER=<%= @tc_user %>
+TEAMCITY_AGENT=<%=@tc_agent_home%>/bin/agent.sh
+TEAMCITY_PIDFILE=<%=@tc_agent_home%>/logs/buildAgent.pid
 
 . /etc/rc.d/init.d/functions
 
