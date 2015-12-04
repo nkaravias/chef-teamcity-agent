@@ -13,23 +13,20 @@ action :install do
   pkg_name = new_resource.install_archive
   local_pkg_path = ::File.join(Chef::Config[:file_cache_path], pkg_name)
 
-  group new_resource.group do
-    action :create
-    system true
-  end
-
-  directory new_resource.home do
-    action :create
-    recursive true
-    group new_resource.group
-  end
-
-  user new_resource.user do
+  user "Teamcity agent user" do
+    comment "TeamCity user"
+    username new_resource.user
+    system false
+    supports { :manage_home }
     home new_resource.home
     shell new_resource.shell
-    gid new_resource.group
-    supports manage_home: true
-    action :create
+    group "users"
+  end
+
+  group "Teamcity agent group" do
+    group_name new_resource.group
+    members new_resource.user
+    append true
   end
 
   remote_file "Download installer from #{new_resource.server_url}" do
