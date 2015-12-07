@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 name 'teamcity_agent'
-maintainer 'Oracle Marketing Cloud DevOps team'
-maintainer_email 'erd_devops_us_grp@oracle.com'
+maintainer 'nikolas.karavias@oracle.com'
+maintainer_email 'nikolas.karavias@oracle.com'
 license 'All rights reserved'
 description 'Installs/Configures teamcity_agent'
 long_description IO.read(File.join(File.dirname(__FILE__), 'README.md'))

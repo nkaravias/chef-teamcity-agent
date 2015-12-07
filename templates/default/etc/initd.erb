@@ -12,11 +12,11 @@ TEAMCITY_PIDFILE=<%=@tc_agent_home%>/logs/buildAgent.pid
 . /etc/rc.d/init.d/functions
 
 start() {
-  sudo -u $TEAMCITY_USER -s -- sh -c "$TEAMCITY_AGENT start"
+  su - $TEAMCITY_USER sh -c "$TEAMCITY_AGENT start"
 }
 
 stop() {
-  sudo -u $TEAMCITY_USER -s -- sh -c "$TEAMCITY_AGENT stop"
+  su - $TEAMCITY_USER sh -c "$TEAMCITY_AGENT stop"
 }
 
 restart() {
